@@ -1,12 +1,22 @@
-// src/App.tsx
 import React from 'react'
+import Header from './component/Header'
 import ChatBot from './component/ChatBot'
+import { Box } from '@mui/material'
+import Footer from './component/Footer'
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'gray',
+      }}
+    >
+      <Header />
       <ChatBot />
-    </div>
+      <Footer />
+    </Box>
   )
 }
 
