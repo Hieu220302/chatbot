@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from controller.chatbot_logic import get_answer
+from controller.auth_controller import login  
 
 app = Flask(__name__)
-CORS(app)  # Cho phép tất cả origin (cẩn thận khi dùng ở production)
+CORS(app)
 
+# 🧠 Chatbot route
 @app.route("/chatbot", methods=["POST"])
 def chatbot():
     data = request.get_json()
@@ -19,6 +21,11 @@ def chatbot():
         "answer": response["answer"],
         "suggested_questions": response["suggested_questions"]
     })
+
+# 🔐 Login route
+@app.route("/login", methods=["POST"])
+def login_route():
+    return login()
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -2,10 +2,16 @@ import os
 import json
 import pandas as pd
 
-JSON_FILE_PATH = "qa_data.json"
-EXCEL_FILE_PATH = "Cleaned_Data.xlsx"
+# 🔧 Cấu hình đúng đường dẫn
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))        # model/
+PROJECT_ROOT = os.path.dirname(BASE_DIR)                     # FlaskBE/
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")                # FlaskBE/data/
+
+# 📁 Các đường dẫn tệp dữ liệu
+JSON_FILE_PATH = os.path.join(DATA_DIR, "qa_data.json")
+EXCEL_FILE_PATH = os.path.join(DATA_DIR, "Cleaned_Data.xlsx")
+UNANSWERED_FILE = os.path.join(DATA_DIR, "unanswered_questions.xlsx")
 EXCEL_SHEET_NAME = "Sheet1"
-UNANSWERED_FILE = "unanswered_questions.xlsx"
 
 def load_qa_data():
     if not os.path.exists(JSON_FILE_PATH):
@@ -33,8 +39,8 @@ def save_unanswered_question(question):
         df = pd.read_excel(UNANSWERED_FILE)
     else:
         df = pd.DataFrame(columns=["ID", "Question", "Answer"])  
-    new_id = len(df) + 1  # ID tự tăng
-    new_entry = pd.DataFrame([[new_id, question, ""]], columns=["ID", "Question", "Answer"])  
     
+    new_id = len(df) + 1
+    new_entry = pd.DataFrame([[new_id, question, ""]], columns=["ID", "Question", "Answer"])  
     df = pd.concat([df, new_entry], ignore_index=True)
     df.to_excel(UNANSWERED_FILE, index=False)

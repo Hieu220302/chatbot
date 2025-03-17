@@ -3,6 +3,7 @@ import Header from './component/Header'
 import ChatBot from './component/ChatBot'
 import { Box } from '@mui/material'
 import Footer from './component/Footer'
+import { ToastContainer } from 'react-toastify'
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <Header />
       <ChatBot />
       <Footer />
+      <ToastContainer position="top-right" autoClose={500} />
     </Box>
   )
 }
