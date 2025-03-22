@@ -14,3 +14,10 @@ export interface LoginResponse {
   user?: string
   error?: string
 }
+
+export interface UnansweredQA {
+  id: number
+  question: string
+  answer: string
+  status: string
+}
